@@ -81,9 +81,10 @@ public class SellTask : BaseTask
 
                 if (timer <= 0)
                 {
-                    resourceInventory.TryGiveOneResource(Spaceship.Instance.GetResourceInventory());
-                    
-                    OnDelivering?.Invoke();
+                    if (resourceInventory.TryGiveOneResource(Spaceship.Instance.GetResourceInventory()))
+                    {
+                        OnDelivering?.Invoke();
+                    }
 
                     if (resourceInventory.IsEmpty())
                     {
