@@ -23,7 +23,7 @@ public class RetrievableManager : MonoBehaviour
 
         Retrievable retrievable = Instantiate(Instance.retrieveablePrefab, transform);
         retrievable.transform.position = position;
-        sourceInventory.GiveAllResources(retrievable.GetResourceInventory());
+        sourceInventory.TryGiveAllResources(retrievable.GetResourceInventory());
         retrievableList.Add(retrievable);
 
         return retrievable;
@@ -31,7 +31,7 @@ public class RetrievableManager : MonoBehaviour
 
     public void PickupRetrievable(Retrievable retrievable, ResourceInventory targetInventory)
     {
-        retrievable.GetResourceInventory().GiveAllResources(targetInventory);
+        retrievable.GetResourceInventory().TryGiveAllResources(targetInventory);
         retrievableList.Remove(retrievable);
         Destroy(retrievable.gameObject);
     }

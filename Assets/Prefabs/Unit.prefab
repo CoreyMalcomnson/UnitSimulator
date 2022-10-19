@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 3280491046045406357}
   - component: {fileID: 3855286644715428141}
   - component: {fileID: 793268737338611953}
-  - component: {fileID: 930938976796739760}
   - component: {fileID: 2188906619700051518}
   m_Layer: 6
   m_Name: Unit
@@ -228,7 +227,7 @@ Transform:
   m_Children:
   - {fileID: 5412881984961426402}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1346898265
 CapsuleCollider:
@@ -429,21 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5236fb01b2b66c64194d4f28a69535fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bagProjectilePrefab: {fileID: 0}
-  bagProjectileSpawn: {fileID: 0}
---- !u!114 &930938976796739760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7992987587094007033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 658639198a0b506409057d2f498918e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navigatingSfxClip: {fileID: 8300000, guid: 6dc6b3cdc9f245d48bb411e865dc1f21, type: 3}
+  bagProjectilePrefab: {fileID: 3223289515768957381, guid: b470e2282f45512499ad6c6313f8d667,
+    type: 3}
+  bagProjectileSpawn: {fileID: 8426066167945581847}
 --- !u!82 &2188906619700051518
 AudioSource:
   m_ObjectHideFlags: 0
@@ -644,6 +631,12 @@ Transform:
 --- !u!1 &8315298527299193193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2678229207653987183, guid: 6094410b98f0c3b4c8218b8d46e12137,
+    type: 3}
+  m_PrefabInstance: {fileID: 6219229957574752774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8426066167945581847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2495067016208101137, guid: 6094410b98f0c3b4c8218b8d46e12137,
     type: 3}
   m_PrefabInstance: {fileID: 6219229957574752774}
   m_PrefabAsset: {fileID: 0}

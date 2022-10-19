@@ -63,7 +63,7 @@ public class RetrieveTask : BaseTask
             case State.HaulingResources:
                 if (!mover.IsNavigating())
                 {
-                    resourceInventory.GiveAllResources(Stockpile.Instance.GetResourceInventory());
+                    resourceInventory.TryGiveAllResources(Stockpile.Instance.GetResourceInventory());
                     SwitchState(State.SearchingForRetrievable);
                 }
                 break;

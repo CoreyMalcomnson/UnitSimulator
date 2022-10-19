@@ -136,7 +136,7 @@ public class HarvestTask : BaseTask
                 break;
             case State.HaulingResources:
                 OnHaulingCompleted?.Invoke(currentHarvestable);
-                resourceInventory.GiveAllResources(Stockpile.Instance.GetResourceInventory());
+                resourceInventory.TryGiveAllResources(Stockpile.Instance.GetResourceInventory());
                 break;
         }
 

@@ -38,6 +38,24 @@ public class CurrencyManagerVisual : MonoBehaviour
     private void UpdateResourceText(CurrencyType currencyType)
     {
         int amount = CurrencyManager.Instance.GetCurrencyAmount(currencyType);
-        currencyTextDictionary[currencyType].text = $"{System.Enum.GetName(typeof(CurrencyType), currencyType)}s: {amount}";
+
+        bool hasSymbol = GetSymbol(currencyType, out string symbol);
+        string name = hasSymbol ? symbol : System.Enum.GetName(typeof(CurrencyType), currencyType) + "s: ";
+
+        currencyTextDictionary[currencyType].text = $"{name}{amount}";
+    }
+
+    private bool GetSymbol(CurrencyType currencyType, out string symbol)
+    {
+        symbol = "";
+
+        switch (currencyType)
+        {
+            case CurrencyType.Credit:
+                symbol = "c";
+                return true;
+        }
+
+        return false;
     }
 }

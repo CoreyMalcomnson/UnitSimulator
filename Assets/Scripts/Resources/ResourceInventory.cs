@@ -65,15 +65,23 @@ public class ResourceInventory : MonoBehaviour
         }
     }
 
-    public void GiveAllResources(ResourceInventory to)
+    public bool TryGiveAllResources(ResourceInventory to)
     {
+        bool gaveResources = false;
+
         foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType)))
         {
-            int amount = GetResourceAmount(resourceType);
-            to.TryAddResourceAmount(resourceType, amount);
+            int amount = Mathf.Min(GetResourceAmount(resourceType), to.GetTotalResourceLimit());
+            
+            if (!to.TryAddResourceAmount(resourceType, amount))
+                continue;
+
             TryRemoveResourceAmount(resourceType, amount);
-            // print($"Gave {System.Enum.GetName(typeof(ResourceType), resourceType)}x{amount} from {gameObject} to {to.gameObject}");
+
+            gaveResources |= true;
         }
+
+        return gaveResources;
     }
 
     public bool TryGiveOneResource(ResourceInventory to)
@@ -113,5 +121,10 @@ public class ResourceInventory : MonoBehaviour
     public int GetTotalResourceAmount()
     {
         return totalResourceAmount;
+    }
+
+    public int GetTotalResourceLimit()
+    {
+        return totalResourceLimit;
     }
 }

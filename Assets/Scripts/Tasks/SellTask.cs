@@ -62,16 +62,8 @@ public class SellTask : BaseTask
                 if (timer <= 0 && !mover.IsNavigating())
                 {
                     ResourceInventory stockpileResourceInventory = Stockpile.Instance.GetResourceInventory();
-                    stockpileResourceInventory.TryGiveOneResource(resourceInventory);
-
-                    if (stockpileResourceInventory.IsEmpty() || resourceInventory.IsFull())
-                    {
-                        SwitchState(State.DeliveringResources);
-                        break;
-                    }
-
-                    mover.MoveTo(Stockpile.Instance.GetRandomPoint());
-                    timer = gatherDelay;
+                    stockpileResourceInventory.TryGiveAllResources(resourceInventory);
+                    SwitchState(State.DeliveringResources);
                 }
 
                 break;
@@ -81,8 +73,8 @@ public class SellTask : BaseTask
 
                 if (timer <= 0)
                 {
-                    if (resourceInventory.TryGiveOneResource(Spaceship.Instance.GetResourceInventory()))
-                    {
+                    if (resourceInventory.TryGiveAllResources(Spaceship.Instance.GetResourceInventory()))
+                    { 
                         OnDelivering?.Invoke();
                     }
 

@@ -10,6 +10,8 @@ public class UnitManager : MonoBehaviour
     public event Action<Unit> OnUnitAdded;
     public event Action<Unit> OnUnitRemoved;
 
+    [SerializeField] private Unit unitPrefab;
+
     private List<Unit> unitsList;
 
     private void Awake()
@@ -33,5 +35,11 @@ public class UnitManager : MonoBehaviour
     public List<Unit> GetUnitsList()
     {
         return unitsList;
+    }
+
+    public void SpawnUnit(Vector3 position)
+    {
+        Unit unit = Instantiate(unitPrefab, position, Quaternion.identity);
+        unit.transform.parent = transform;
     }
 }

@@ -18,6 +18,11 @@ public class CurrencyManager : MonoBehaviour
         InitializeCurrencyDictionary();
     }
 
+    private void Start()
+    {
+        AddCurrencyAmount(CurrencyType.Credit, 300);
+    }
+
     private void InitializeCurrencyDictionary()
     {
         currencyDictionary = new Dictionary<CurrencyType, int>();
