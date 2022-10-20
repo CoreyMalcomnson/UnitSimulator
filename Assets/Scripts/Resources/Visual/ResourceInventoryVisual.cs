@@ -32,7 +32,7 @@ public class ResourceInventoryVisual : MonoBehaviour
         resourceInventory.OnResourceAmountChanged += ResourceInventory_OnResourceAmountChanged;
     }
 
-    private void ResourceInventory_OnResourceAmountChanged(ResourceType resourceType)
+    private void ResourceInventory_OnResourceAmountChanged(ResourceType resourceType, int oldValue, int newValue)
     {
         UpdateResourceText(resourceType);
     }

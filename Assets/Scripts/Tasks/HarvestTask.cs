@@ -108,6 +108,7 @@ public class HarvestTask : BaseTask
     {
         if (currentHarvestable == null) return false;
         if (currentHarvestable.IsDead()) return false;
+        if (!isActive) return false;
 
         currentHarvestable.Harvest();
 
@@ -170,8 +171,6 @@ public class HarvestTask : BaseTask
         SwitchState(State.NavigatingToHarvestable);
     }
 
-
-
     public override void TaskComplete()
     {
         base.TaskComplete();
@@ -182,6 +181,7 @@ public class HarvestTask : BaseTask
         switch (state)
         {
             case State.Harvesting:
+                OnHarvestingCompleted?.Invoke(currentHarvestable);
                 break;
             case State.HaulingResources:
                 OnHaulingCompleted?.Invoke(currentHarvestable);

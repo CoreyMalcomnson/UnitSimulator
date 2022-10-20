@@ -49,7 +49,7 @@ public class SellTask : BaseTask
             case State.NavigatingToStockpile:
                 if (!mover.IsNavigating())
                 {
-                    SwitchState(State.GatheringResources);
+                    SwitchState(State.WaitingForResources);
                 }
                 break;
             case State.WaitingForResources:
@@ -65,7 +65,6 @@ public class SellTask : BaseTask
                     stockpileResourceInventory.TryGiveAllResources(resourceInventory);
                     SwitchState(State.DeliveringResources);
                 }
-
                 break;
             case State.DeliveringResources:
                 if (Spaceship.Instance.GetState() != Spaceship.State.Docked)
@@ -112,7 +111,7 @@ public class SellTask : BaseTask
                 mover.MoveTo(Stockpile.Instance.GetPosition());
                 break;
             case State.GatheringResources:
-                mover.MoveTo(Stockpile.Instance.GetRandomPoint());
+                mover.MoveTo(Stockpile.Instance.GetRandomPoint().point);
                 timer = gatherDelay;
                 break;
             case State.DeliveringResources:

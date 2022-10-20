@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Stockpile : MonoBehaviour, ITaskable
 {
     public static Stockpile Instance;
 
-    [SerializeField] private Transform stockpileTransform;
     [SerializeField] private float randomPointExtent = 3.5f;
 
     private ResourceInventory resourceInventory;
@@ -31,15 +31,20 @@ public class Stockpile : MonoBehaviour, ITaskable
 
     public Vector3 GetPosition()
     {
-        return stockpileTransform.position;
+        return transform.position;
     }
 
-    public Vector3 GetRandomPoint()
+    public RaycastHit GetRandomPoint()
     {
-        return stockpileTransform.position + new Vector3(
-            UnityEngine.Random.Range(-randomPointExtent, randomPointExtent),
-            0,
-            UnityEngine.Random.Range(-randomPointExtent, randomPointExtent));
+        Vector3 randomPosition = transform.position + new Vector3(
+            Random.Range(-randomPointExtent, randomPointExtent),
+            2f,
+            Random.Range(-randomPointExtent, randomPointExtent)
+        );
+
+        Physics.Raycast(randomPosition, Vector3.down, out RaycastHit hitInfo, 5f);
+
+        return hitInfo;
     }
 
     public TaskType GetTaskType()

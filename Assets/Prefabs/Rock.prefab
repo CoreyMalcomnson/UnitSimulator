@@ -5198,6 +5198,11 @@ PrefabInstance:
       propertyPath: healthSystem
       value: 
       objectReference: {fileID: 487344909111635281}
+    - target: {fileID: 7091411021701918360, guid: 45aeda4a716608f498f3e25c811b46c0,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7091411021701918363, guid: 45aeda4a716608f498f3e25c811b46c0,
         type: 3}
       propertyPath: m_Pivot.x

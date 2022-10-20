@@ -18,6 +18,12 @@ public class Mover : MonoBehaviour
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        MoveSome();
+    }
+
+    private void MoveSome()
+    {
+        navMeshAgent.SetDestination(transform.position + Vector3.right * navMeshAgent.stoppingDistance * 1.1f); // Force recalculates upward direction
     }
 
     private void Update()

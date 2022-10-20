@@ -39,7 +39,6 @@ public class UnitManager : MonoBehaviour
 
     public void SpawnUnit(Vector3 position)
     {
-        Unit unit = Instantiate(unitPrefab, position, Quaternion.identity);
-        unit.transform.parent = transform;
+        Unit unit = Instantiate(unitPrefab, position, Quaternion.identity, transform);
     }
 }

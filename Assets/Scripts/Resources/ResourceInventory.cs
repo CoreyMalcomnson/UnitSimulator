@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResourceInventory : MonoBehaviour
 {
-    public event Action<ResourceType> OnResourceAmountChanged;
+    public event Action<ResourceType,int,int> OnResourceAmountChanged; // type, old, new
 
     [SerializeField] private int totalResourceLimit = int.MaxValue;
 
@@ -23,7 +23,7 @@ public class ResourceInventory : MonoBehaviour
         foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType)))
         {
             resourceDictionary[resourceType] = 0;
-            OnResourceAmountChanged?.Invoke(resourceType);
+            OnResourceAmountChanged?.Invoke(resourceType, 0, 0);
         }
     }
 
@@ -32,9 +32,12 @@ public class ResourceInventory : MonoBehaviour
         if (IsFull()) return false;
         if (totalResourceAmount + amount > totalResourceLimit) return false;
 
+        int oldValue = resourceDictionary[resourceType];
+
         resourceDictionary[resourceType] += amount;
         totalResourceAmount += amount;
-        OnResourceAmountChanged?.Invoke(resourceType);
+
+        OnResourceAmountChanged?.Invoke(resourceType, oldValue, resourceDictionary[resourceType]);
 
         return true;
     }
@@ -43,9 +46,12 @@ public class ResourceInventory : MonoBehaviour
     {
         if (GetResourceAmount(resourceType) < amount) return false;
 
+        int oldValue = resourceDictionary[resourceType];
+
         resourceDictionary[resourceType] -= amount;
         totalResourceAmount -= amount;
-        OnResourceAmountChanged?.Invoke(resourceType);
+
+        OnResourceAmountChanged?.Invoke(resourceType, oldValue, resourceDictionary[resourceType]);
 
         return true;
     }
@@ -72,7 +78,8 @@ public class ResourceInventory : MonoBehaviour
         foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType)))
         {
             int amount = Mathf.Min(GetResourceAmount(resourceType), to.GetTotalResourceLimit());
-            
+            if (amount == 0) continue;
+
             if (!to.TryAddResourceAmount(resourceType, amount))
                 continue;
 
