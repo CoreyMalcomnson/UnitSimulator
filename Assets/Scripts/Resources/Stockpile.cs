@@ -8,6 +8,7 @@ public class Stockpile : MonoBehaviour, ITaskable
     public static Stockpile Instance;
 
     [SerializeField] private float randomPointExtent = 3.5f;
+    [SerializeField] private LayerMask randomPointLayerMask;
 
     private ResourceInventory resourceInventory;
 
@@ -42,7 +43,7 @@ public class Stockpile : MonoBehaviour, ITaskable
             Random.Range(-randomPointExtent, randomPointExtent)
         );
 
-        Physics.Raycast(randomPosition, Vector3.down, out RaycastHit hitInfo, 5f);
+        Physics.Raycast(randomPosition, Vector3.down, out RaycastHit hitInfo, 5f, randomPointLayerMask);
 
         return hitInfo;
     }
